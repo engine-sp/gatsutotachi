@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentQuestionIndex = 0;
     let score = 0;
     let userAnswers = [];
+    let canGoNext = false;
 
     const showScreen = (screenName) => {
         for (const key in screens) {
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             answerInput.value = '';
             submitBtn.classList.remove('hidden');
             nextBtn.classList.add('hidden');
-            setTimeout(() => answerInput.focus(), 500);
+            answerInput.focus();
         } else {
             showEndScreen();
         }
@@ -152,7 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    document.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            if (!nextBtn.classList.contains('hidden') && canGoNext) {
+                nextBtn.click();
+            }
+        }
+    });
+
     submitBtn.addEventListener('click', () => {
+        canGoNext = false;
         const userAnswer = answerInput.value.trim();
         userAnswers.push(userAnswer);
         const correctAnswer = questions[currentQuestionIndex].kana;
@@ -170,9 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         submitBtn.classList.add('hidden');
         nextBtn.classList.remove('hidden');
+        setTimeout(() => { canGoNext = true; }, 500);
     });
 
     nextBtn.addEventListener('click', () => {
+        canGoNext = false;
         currentQuestionIndex++;
         displayQuestion();
     });
