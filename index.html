@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本語日付平仮名練習</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div id="app" class="container mx-auto p-4 bg-white shadow-lg rounded-lg max-w-md">
+
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <h1 class="text-2xl font-bold text-center mb-4">日本語日付平仮名練習</h1>
+            <div class="text-center mb-4">
+                <p>練習範囲設定：<span id="scope-display">全部</span></p>
+                <button id="change-scope-btn" class="text-blue-500 hover:underline">[修改]</button>
+            </div>
+            <button id="start-btn" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">練習開始</button>
+        </div>
+
+        <!-- Scope Settings Modal -->
+        <div id="scope-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                <div class="mt-3 text-center">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">練習範囲設定</h3>
+                    <div class="mt-2 px-7 py-3">
+                        <div class="text-left">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" id="months-checkbox" class="form-checkbox h-5 w-5 text-blue-600" checked>
+                                <span class="ml-2 text-gray-700">練習「X月」</span>
+                            </label>
+                        </div>
+                        <div class="text-left">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" id="days-checkbox" class="form-checkbox h-5 w-5 text-blue-600" checked>
+                                <span class="ml-2 text-gray-700">練習「X日」</span>
+                            </label>
+                            <div class="ml-8">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="day-practice-mode" value="special" class="form-radio h-4 w-4 text-blue-600" checked>
+                                    <span class="ml-2 text-gray-700">練習特別日</span>
+                                </label>
+                                <label class="inline-flex items-center ml-4">
+                                    <input type="radio" name="day-practice-mode" value="all" class="form-radio h-4 w-4 text-blue-600">
+                                    <span class="ml-2 text-gray-700">練習全部日期</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="items-center px-4 py-3">
+                        <button id="save-scope-btn" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">設定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Screen -->
+        <div id="practice-screen" class="hidden">
+            <div class="flex justify-between mb-4">
+                <span id="question-counter"></span>
+                <button id="early-end-btn" class="text-red-500 hover:underline">[臨時終止]</button>
+            </div>
+            <div id="kanji-display" class="text-5xl font-bold text-center my-8"></div>
+            <div id="status-bar" class="text-center h-8 mb-4"></div>
+            <input type="text" id="answer-input" class="w-full p-2 border rounded mb-4 text-center" placeholder="請輸入平假名">
+            <button id="submit-btn" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">送出答案</button>
+            <button id="next-btn" class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 hidden">下一題</button>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-screen" class="hidden">
+            <h2 class="text-2xl font-bold text-center mb-4">練習結束</h2>
+            <p id="score-display" class="text-center text-xl mb-4"></p>
+            <div id="review-table" class="mb-4"></div>
+            <button id="restart-btn" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">再練習一次</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
